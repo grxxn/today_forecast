@@ -5,25 +5,13 @@ class ObsrForecastModel {
 
   ObsrForecastModel({required this.category, required this.obsrValue});
 
-  // ObsrForecastModel.fromJson(Map<String, dynamic> json)
-  //     : category = json['category'],
-  //       obsrValue = json['obsrValue'];
-
-  static Future<List<ObsrForecastModel>> fetchWeatherData() async {
-    final now = DateTime.now();
-    final baseDate =
-        "${now.year}${now.month.toString().padLeft(2, '0')}${now.day.toString().padLeft(2, '0')}";
-    const baseTime = "0600";
-    const nx = "60";
-    const ny = "126";
-
-    final weatherData = await WeatherApiService.getWeatherData(
-        baseDate: baseDate, baseTime: baseTime, nx: nx, ny: ny);
+  static Future<List<ObsrForecastModel>> fetchObsrData() async {
+    final weatherData = await WeatherApiService().getUltraSrtNcst();
 
     return weatherData;
   }
 
-  static String? getObsrValueForCategory(
+  static String? getValueForCategory(
       List<ObsrForecastModel> weatherData, String category) {
     try {
       final data = weatherData.firstWhere((item) => item.category == category);
