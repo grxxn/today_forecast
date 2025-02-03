@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/services/address_api_service.dart';
+import 'package:flutter_project/widgets/fine_dust_widget.dart';
 import 'package:flutter_project/widgets/weather_widget.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -12,6 +13,7 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
   String _address = "위치를 가져오는 중 ...";
+  Map<String, double> currentCoordinates = {};
 
   @override
   void initState() {
@@ -25,6 +27,10 @@ class _LocationScreenState extends State<LocationScreen> {
       setState(() {
         _address =
             "${addressData['region_1depth_name']} ${addressData['region_2depth_name']} ${addressData['region_3depth_name']}";
+        currentCoordinates = {
+          'latitude': position.latitude,
+          'longitude': position.longitude,
+        };
       });
     }).catchError((e) {
       setState(() {
@@ -62,10 +68,9 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 15,
-        ),
+      body: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
@@ -98,9 +103,31 @@ class _LocationScreenState extends State<LocationScreen> {
               height: 20,
             ),
             const WeatherWidget(),
-            const Row(
-              children: [Text('미세먼지')],
-            )
+            const SizedBox(
+              height: 10,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const Row(
+                  children: [
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      '미세먼지',
+                      textAlign: TextAlign.left,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 3,
+                ),
+                currentCoordinates.isNotEmpty
+                    ? FineDustWidget(currentCoordinates: currentCoordinates)
+                    : const CircularProgressIndicator(),
+              ],
+            ),
           ],
         ),
       ),

@@ -27,4 +27,22 @@ class AddressApiService {
       throw Error();
     }
   }
+
+  static Future<Map<String, String>> getTmCoordinates(
+      double latitude, double longitude) async {
+    final String url =
+        "https://dapi.kakao.com/v2/local/geo/transcoord.json?x=$longitude&y=$latitude&input_coord=WGS84&output_coord=TM";
+    final response = await http.get(Uri.parse(url),
+        headers: {'Authorization': "KakaoAK ${dotenv.env["KAKAO_API_KEY"]}"});
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final tmX = data['documents'][0]['x'].toString();
+      final tmY = data['documents'][0]['y'].toString();
+
+      return {'tmX': tmX, 'tmY': tmY};
+    } else {
+      return {'tmX': '', 'tmY': ''};
+    }
+  }
 }

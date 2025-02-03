@@ -113,7 +113,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Colors.black.withAlpha(20),
+        color: Colors.black.withAlpha(12),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
