@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/common/common.dart';
 import 'package:flutter_project/models/fcst_forecast_model.dart';
 import 'package:flutter_project/models/obsr_forecast_model.dart';
 import 'package:flutter_project/widgets/weather_info_widget.dart';
@@ -160,7 +161,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
                       icon: Icons.device_thermostat_outlined,
                       title: "최고 / 최저",
                       value:
-                          "${FcstForecastModel.getValueForCategory(fcstList, "TMN") ?? ""} / ${FcstForecastModel.getValueForCategory(fcstList, "TMX") ?? ""}",
+                          "${Common.convertStringtoInt(FcstForecastModel.getValueForCategory(fcstList, "TMX"))}° / ${Common.convertStringtoInt(FcstForecastModel.getValueForCategory(fcstList, "TMN"))}°",
                     ),
                     WeatherInfoWidget(
                       icon: MdiIcons.waterOutline,

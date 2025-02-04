@@ -2,13 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_project/models/fine_dust_model.dart';
 import 'package:http/http.dart' as http;
 
 class FineDustApiService {
   static String apiKey = dotenv.env["WEATHER_API_KEY"]!;
   static String baseUrl = "http://apis.data.go.kr/B552584";
-  // static String fineDustBaseUrl =
-  //     "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc";
 
   final Map<String, dynamic> commonParameter = {
     'serviceKey': apiKey,
@@ -29,7 +28,6 @@ class FineDustApiService {
       final response = await http.get(fetchUri);
 
       if (response.statusCode == 200) {
-        // debugPrint(response.body);
         final data = jsonDecode(response.body);
         final List<dynamic> items = data['response']['body']['items'];
 
@@ -42,21 +40,41 @@ class FineDustApiService {
         });
 
         return minTmItem;
-
-        // List<ObsrForecastModel> extractedForecast =
-        //     List<ObsrForecastModel>.from(forecast.map((item) {
-        //   return ObsrForecastModel(
-        //     category: item['category'],
-        //     obsrValue: item['obsrValue'],
-        //   );
-        // }));
-
-        // return extractedForecast;
       } else {
         throw Exception(
             "Failed to fetch NearbyMsrstnList: ${response.statusCode}");
       }
     } catch (e) {
+      throw Error();
+    }
+  }
+
+  Future<FineDustModel> getMsrstnAcctoRltmMesureDnsty(
+      String stationName) async {
+    final String url =
+        '$baseUrl/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty';
+
+    final queryPrarmeters = {...commonParameter};
+    queryPrarmeters['stationName'] = stationName;
+    queryPrarmeters['dataTerm'] = "DAILY";
+
+    final fetchUri = Uri.parse(url).replace(queryParameters: queryPrarmeters);
+    try {
+      final response = await http.get(fetchUri);
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final items = data['response']['body']['items'];
+
+        final fineDustResponse = FineDustModel.fromJson(items[0]);
+
+        return fineDustResponse;
+      } else {
+        throw Exception(
+            "Failed to fetch MsrstnAcctoRltmMesureDnsty: ${response.statusCode}");
+      }
+    } catch (e, stackTrace) {
+      debugPrint('e: $e, stackTrace: $stackTrace');
       throw Error();
     }
   }

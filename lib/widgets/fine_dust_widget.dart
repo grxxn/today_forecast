@@ -40,7 +40,9 @@ class _FineDustWidgetState extends State<FineDustWidget> {
         });
       }
     }
-    // await FineDustApiService().getNearbyMsrstnList(tmX, tmY)
+    // 측정소 실시간 측정정보 조회
+    debugPrint(
+        '${FineDustApiService().getMsrstnAcctoRltmMesureDnsty(nearestStation)}');
   }
 
   @override

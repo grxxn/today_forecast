@@ -28,6 +28,7 @@ class WeatherInfoWidget extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
             children: [
@@ -36,7 +37,7 @@ class WeatherInfoWidget extends StatelessWidget {
                 size: 18,
               ),
               const SizedBox(
-                width: 8,
+                width: 3,
               ),
               Text(
                 title,
