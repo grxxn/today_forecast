@@ -115,7 +115,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       width: 10,
                     ),
                     Text(
-                      '미세먼지',
+                      '대기환경정보',
                       textAlign: TextAlign.left,
                     ),
                   ],

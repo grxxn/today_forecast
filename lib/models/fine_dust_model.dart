@@ -1,6 +1,10 @@
 class FineDustModel {
-  final double so2Value, coValue, o3Value, no2Value;
-  final int pm10Value,
+  final String dataTime,
+      so2Value,
+      coValue,
+      o3Value,
+      no2Value,
+      pm10Value,
       khaiValue,
       khaiGrade,
       so2Grade,
@@ -8,47 +12,39 @@ class FineDustModel {
       o3Grade,
       no2Grade,
       pm10Grade;
-  final int? pm10Value24,
+  final String? pm10Value24,
       pm25Value,
       pm25Value24,
       pm25Grade,
       pm10Grade1h,
-      pm25Grade1h;
-  final String dataTime;
-  final String? so2Flag, coFlag, o3Flag, no2Flag, pm10Flag, pm25Flag;
+      pm25Grade1h,
+      so2Flag,
+      coFlag,
+      o3Flag,
+      no2Flag,
+      pm10Flag,
+      pm25Flag;
 
   FineDustModel.fromJson(Map<String, dynamic> json)
       : dataTime = json['dataTime'],
-        so2Value = double.parse(json['so2Value']),
-        coValue = double.parse(json['coValue']),
-        o3Value = double.parse(json['o3Value']),
-        no2Value = double.parse(json['no2Value']),
-        pm10Value = int.parse(json['pm10Value']),
-        pm10Value24 = json['pm10Value24'] != null
-            ? int.parse(json['pm10Value24'])
-            : json['pm10Value24'],
-        pm25Value = json['pm25Value'] != null
-            ? int.parse(json['pm25Value'])
-            : json['pm25Value'],
-        pm25Value24 = json['pm25Value24'] != null
-            ? int.parse(json['pm25Value24'])
-            : json['pm25Value24'],
-        khaiValue = int.parse(json['khaiValue']),
-        khaiGrade = int.parse(json['khaiGrade']),
-        so2Grade = int.parse(json['so2Grade']),
-        coGrade = int.parse(json['coGrade']),
-        o3Grade = int.parse(json['o3Grade']),
-        no2Grade = int.parse(json['no2Grade']),
-        pm10Grade = int.parse(json['pm10Grade']),
-        pm25Grade = json['pm25Grade'] != null
-            ? int.parse(json['pm25Grade'])
-            : json['pm25Grade'],
-        pm10Grade1h = json['pm10Grade1h'] != null
-            ? int.parse(json['pm10Grade1h'])
-            : json['pm10Grade1h'],
-        pm25Grade1h = json['pm25Grade1h'] != null
-            ? int.parse(json['pm25Grade1h'])
-            : json['pm25Grade1h'],
+        so2Value = json['so2Value'],
+        coValue = json['coValue'],
+        o3Value = json['o3Value'],
+        no2Value = json['no2Value'],
+        pm10Value = json['pm10Value'],
+        pm10Value24 = json['pm10Value24'],
+        pm25Value = json['pm25Value'],
+        pm25Value24 = json['pm25Value24'],
+        khaiValue = json['khaiValue'],
+        khaiGrade = json['khaiGrade'],
+        so2Grade = json['so2Grade'],
+        coGrade = json['coGrade'],
+        o3Grade = json['o3Grade'],
+        no2Grade = json['no2Grade'],
+        pm10Grade = json['pm10Grade'],
+        pm25Grade = json['pm25Grade'],
+        pm10Grade1h = json['pm10Grade1h'],
+        pm25Grade1h = json['pm25Grade1h'],
         so2Flag = json['so2Flag'],
         coFlag = json['coFlag'],
         o3Flag = json['o3Flag'],

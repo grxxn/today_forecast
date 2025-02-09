@@ -49,6 +49,7 @@ class FineDustApiService {
     }
   }
 
+  // 측정소 별 대기환경 정보 조회
   Future<FineDustModel> getMsrstnAcctoRltmMesureDnsty(
       String stationName) async {
     final String url =
@@ -57,6 +58,7 @@ class FineDustApiService {
     final queryPrarmeters = {...commonParameter};
     queryPrarmeters['stationName'] = stationName;
     queryPrarmeters['dataTerm'] = "DAILY";
+    queryPrarmeters['ver'] = "1.0";
 
     final fetchUri = Uri.parse(url).replace(queryParameters: queryPrarmeters);
     try {

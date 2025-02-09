@@ -35,22 +35,26 @@ class WeatherInfoWidget extends StatelessWidget {
               Icon(
                 icon,
                 size: 18,
+                color: Colors.grey.shade700,
               ),
               const SizedBox(
                 width: 3,
               ),
               Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12.5,
+                  color: Colors.grey.shade700,
                 ),
               ),
             ],
           ),
           Text(
             value,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12.5,
+              fontWeight: FontWeight.w600,
+              color: Colors.grey.shade800,
             ),
           ),
         ],

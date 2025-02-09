@@ -67,6 +67,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
   Icon getWeatherIcon(String sky, String pty) {
     IconData icon = MdiIcons.weatherCloudy;
     Color iconColor = Colors.blueGrey.shade400;
+    double iconSize = 100;
 
     if (pty == "1") {
       icon = MdiIcons.weatherPouring;
@@ -81,15 +82,16 @@ class _WeatherWidgetState extends State<WeatherWidget> {
       iconColor = Colors.blue.shade200;
     }
     if (sky == "1") {
-      icon = Icons.wb_sunny_outlined;
+      icon = Icons.circle;
       iconColor = Colors.amber.shade400;
+      iconSize = 85;
     }
     if (sky == "3") icon = MdiIcons.weatherCloudy;
 
     return Icon(
       icon,
       color: iconColor,
-      size: 100,
+      size: iconSize,
     );
   }
 
@@ -136,7 +138,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
                   color: Colors.black87,
                   fontSize: 36,
                   fontWeight: FontWeight.w800,
-                  letterSpacing: -2,
+                  letterSpacing: -1.5,
                   textBaseline: TextBaseline.alphabetic,
                 ),
               ),
@@ -159,7 +161,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
                   children: [
                     WeatherInfoWidget(
                       icon: Icons.device_thermostat_outlined,
-                      title: "최고 / 최저",
+                      title: "최고/최저",
                       value:
                           "${Common.convertStringtoInt(FcstForecastModel.getValueForCategory(fcstList, "TMX"))}° / ${Common.convertStringtoInt(FcstForecastModel.getValueForCategory(fcstList, "TMN"))}°",
                     ),

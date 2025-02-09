@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_project/models/fcst_forecast_model.dart';
 import 'package:flutter_project/models/obsr_forecast_model.dart';
@@ -58,7 +59,8 @@ class WeatherApiService {
       } else {
         throw Exception("Failed to fetch UltraSrtNcst: ${response.statusCode}");
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint('e: $e, stackTrace: $stackTrace');
       throw Error();
     }
   }
