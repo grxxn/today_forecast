@@ -109,7 +109,7 @@ class _FineDustWidgetState extends State<FineDustWidget> {
     }
     setState(() {
       currentTabIdx = tabIdx;
-      currentColor = gradeColors[int.parse(currentGrade) + 1];
+      // currentColor = gradeColors[int.parse(currentGrade) + 1];
     });
   }
 
@@ -125,33 +125,42 @@ class _FineDustWidgetState extends State<FineDustWidget> {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Colors.black.withAlpha(12),
+        color: const Color(0xFFF3F3F3),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(
-                Icons.place,
-                size: 14,
-                color: Colors.grey.shade700,
+              const Text(
+                '대기환경정보',
+                textAlign: TextAlign.left,
               ),
-              const SizedBox(
-                width: 2,
-              ),
-              Text(
-                '$nearestStation 측정소',
-                style: TextStyle(
-                  fontSize: 10,
-                  color: Colors.grey.shade700,
-                ),
-              ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.place,
+                    size: 14,
+                    color: Colors.grey.shade700,
+                  ),
+                  const SizedBox(
+                    width: 2,
+                  ),
+                  Text(
+                    '$nearestStation 측정소',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey.shade700,
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
           const SizedBox(
-            height: 10,
+            height: 14,
           ),
           // 대기환경정보 Tab
           Row(
@@ -203,7 +212,7 @@ class _FineDustWidgetState extends State<FineDustWidget> {
                   ),
                 ),
                 Text(
-                  '${getGradeValue()} ($currentValue)',
+                  '${getGradeValue()}  ($currentValue)',
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w900,

@@ -67,7 +67,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
   Icon getWeatherIcon(String sky, String pty) {
     IconData icon = MdiIcons.weatherCloudy;
     Color iconColor = Colors.blueGrey.shade400;
-    double iconSize = 100;
+    double iconSize = 130;
 
     if (pty == "1") {
       icon = MdiIcons.weatherPouring;
@@ -109,94 +109,123 @@ class _WeatherWidgetState extends State<WeatherWidget> {
     return Container(
       padding: const EdgeInsets.symmetric(
         vertical: 20,
-        horizontal: 22,
       ),
       margin: const EdgeInsets.only(
-        bottom: 15,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.black.withAlpha(12),
+        bottom: 3,
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            "오늘의 날씨",
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontSize: 12,
-              color: Color(0xFF252525),
+          Text(
+            '$temperature°',
+            style: const TextStyle(
+              color: Colors.black87,
+              fontSize: 56,
+              fontWeight: FontWeight.w800,
+              letterSpacing: -1.5,
+              textBaseline: TextBaseline.alphabetic,
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                '$temperature°',
-                style: const TextStyle(
-                  color: Colors.black87,
-                  fontSize: 36,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: -1.5,
-                  textBaseline: TextBaseline.alphabetic,
-                ),
-              ),
-              getWeatherIcon(
-                FcstForecastModel.getValueForCategory(fcstList, "SKY") ?? "1",
-                FcstForecastModel.getValueForCategory(fcstList, "PTY") ?? "0",
-              )
-            ],
+          getWeatherIcon(
+            FcstForecastModel.getValueForCategory(fcstList, "SKY") ?? "1",
+            FcstForecastModel.getValueForCategory(fcstList, "PTY") ?? "0",
           ),
           const SizedBox(
-            height: 12,
+            height: 20,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 1,
-                child: Column(
+          Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 20,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.black.withAlpha(10),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    WeatherInfoWidget(
-                      icon: Icons.device_thermostat_outlined,
-                      title: "최고/최저",
-                      value:
-                          "${Common.convertStringtoInt(FcstForecastModel.getValueForCategory(fcstList, "TMX"))}° / ${Common.convertStringtoInt(FcstForecastModel.getValueForCategory(fcstList, "TMN"))}°",
+                    Expanded(
+                      child: WeatherInfoWidget(
+                        icon: Icons.device_thermostat_outlined,
+                        title: "최고/최저",
+                        value:
+                            "${Common.convertStringtoInt(FcstForecastModel.getValueForCategory(fcstList, "TMX"))}° / ${Common.convertStringtoInt(FcstForecastModel.getValueForCategory(fcstList, "TMN"))}°",
+                      ),
                     ),
-                    WeatherInfoWidget(
-                      icon: MdiIcons.waterOutline,
-                      title: "습도",
-                      value:
-                          "${FcstForecastModel.getValueForCategory(fcstList, "REH") ?? ""} %",
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      child: WeatherInfoWidget(
+                        icon: MdiIcons.weatherRainy,
+                        title: "강수",
+                        value:
+                            "${FcstForecastModel.getValueForCategory(fcstList, "POP") ?? ""} %",
+                      ),
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              Expanded(
-                flex: 1,
-                child: Column(
+                Row(
                   children: [
-                    WeatherInfoWidget(
-                      icon: MdiIcons.weatherRainy,
-                      title: "강수",
-                      value:
-                          "${FcstForecastModel.getValueForCategory(fcstList, "POP") ?? ""} %",
+                    Expanded(
+                      child: Container(
+                        height: 1,
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            top: BorderSide(
+                              color: Color.fromARGB(21, 0, 0, 0),
+                              width: 1,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                    WeatherInfoWidget(
-                      icon: MdiIcons.weatherWindy,
-                      title: "바람",
-                      value:
-                          "${getWindDirection(FcstForecastModel.getValueForCategory(fcstList, "VEC") ?? "0")} ${FcstForecastModel.getValueForCategory(fcstList, "WSD") ?? ""} m/s",
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: 1,
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            top: BorderSide(
+                              color: Color.fromARGB(21, 0, 0, 0),
+                              width: 1,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
-              )
-            ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: WeatherInfoWidget(
+                        icon: MdiIcons.weatherRainy,
+                        title: "강수",
+                        value:
+                            "${FcstForecastModel.getValueForCategory(fcstList, "POP") ?? ""} %",
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      child: WeatherInfoWidget(
+                        icon: MdiIcons.weatherWindy,
+                        title: "바람",
+                        value:
+                            "${getWindDirection(FcstForecastModel.getValueForCategory(fcstList, "VEC") ?? "0")} ${FcstForecastModel.getValueForCategory(fcstList, "WSD") ?? ""} m/s",
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           )
         ],
       ),

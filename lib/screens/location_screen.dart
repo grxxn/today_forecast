@@ -76,7 +76,7 @@ class _LocationScreenState extends State<LocationScreen> {
           mainAxisSize: MainAxisSize.max,
           children: [
             const SizedBox(
-              height: 65,
+              height: 50,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -100,34 +100,12 @@ class _LocationScreenState extends State<LocationScreen> {
               ],
             ),
             const SizedBox(
-              height: 20,
-            ),
-            const WeatherWidget(),
-            const SizedBox(
               height: 10,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Row(
-                  children: [
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      '대기환경정보',
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 3,
-                ),
-                currentCoordinates.isNotEmpty
-                    ? FineDustWidget(currentCoordinates: currentCoordinates)
-                    : const CircularProgressIndicator(),
-              ],
-            ),
+            const WeatherWidget(),
+            currentCoordinates.isNotEmpty
+                ? FineDustWidget(currentCoordinates: currentCoordinates)
+                : const CircularProgressIndicator(),
           ],
         ),
       ),

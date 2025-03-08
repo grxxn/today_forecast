@@ -19,13 +19,6 @@ class WeatherInfoWidget extends StatelessWidget {
         top: 5,
         bottom: 5,
       ),
-      decoration: const BoxDecoration(
-        border: Border(
-          top: BorderSide(
-            color: Color.fromARGB(20, 0, 0, 0),
-          ),
-        ),
-      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,7 +31,7 @@ class WeatherInfoWidget extends StatelessWidget {
                 color: Colors.grey.shade700,
               ),
               const SizedBox(
-                width: 3,
+                width: 6,
               ),
               Text(
                 title,
